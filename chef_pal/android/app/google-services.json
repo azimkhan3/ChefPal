@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "150214907100",
+    "firebase_url": "https://chef-pal-default-rtdb.firebaseio.com",
+    "project_id": "chef-pal",
+    "storage_bucket": "chef-pal.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:150214907100:android:9c26986c41bce9c9f99019",
+        "android_client_info": {
+          "package_name": "app.chefpal.chefpal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "150214907100-orsu95ou34gk3ih0sm5t4lji74igeu67.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyApPMVAepnYrswW0l4MEQsQ3aoTLzWXBv4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "150214907100-orsu95ou34gk3ih0sm5t4lji74igeu67.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
