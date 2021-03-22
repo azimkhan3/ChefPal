@@ -1,3 +1,4 @@
+import 'package:chef_pal/views/ui/ingredient_page/ingredient_view.dart';
 import 'package:chef_pal/views/utils/placeholder_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -11,7 +12,7 @@ class HomeView extends StatefulWidget {
 class _HomeViewState extends State<HomeView> {
   int _currentIndex = 0;
   final List<Widget> _children = [
-    PlaceholderWidget(Colors.white),
+    IngredientView(),
     PlaceholderWidget(Colors.deepOrange),
     PlaceholderWidget(Colors.green),
     PlaceholderWidget(Colors.blue)
@@ -27,7 +28,7 @@ class _HomeViewState extends State<HomeView> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('My Flutter App'),
+        title: Text('ChefPal'),
       ),
       body: _children[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
