@@ -19,7 +19,7 @@ class _AuthentificationState extends State<Authentification> {
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
         decoration: BoxDecoration(
-          color: Colors.blueAccent,
+          color: Colors.white10,
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -69,6 +69,7 @@ class _AuthentificationState extends State<Authentification> {
                 color: Colors.white,
               ),
               child: MaterialButton(
+                color: Colors.orange.shade400,
                 onPressed: () async {
                   bool shouldNavigate =
                       await register(_emailField.text, _passwordField.text);
@@ -94,6 +95,7 @@ class _AuthentificationState extends State<Authentification> {
                 color: Colors.white,
               ),
               child: MaterialButton(
+                color: Colors.orange.shade400,
                 onPressed: () async {
                   bool shouldNavigate =
                       await signIn(_emailField.text, _passwordField.text);
