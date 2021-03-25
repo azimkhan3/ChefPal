@@ -1,4 +1,4 @@
-# SoftwareEnginerringProject
+# SoftwareEngineeringProject
 
 Spring 2021 ECE452 Group 9
 
@@ -25,3 +25,7 @@ Clone from terminal
     <li><a href = "https://firebase.google.com/docs">Firebase Docs</a></li>
     <li><a href = "https://firebase.flutter.dev/">FlutterFire Docs</a></li>
 </ul>
+
+## Code
+
+Check chef_pal/lib for main code
