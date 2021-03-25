@@ -1,0 +1,16 @@
+{
+  "Fruit": ["Apples", "Peaches", "Grapes"],
+  "Vegetables": [
+    "Broccoli",
+    "Cabbage",
+    "Lettuce",
+    "Tomatos",
+    "Kidney Beans",
+    "Cauliflower"
+  ],
+  "Dairy": [],
+  "Starches": [],
+  "Meat": [],
+  "Seafood": [],
+  "Spices": []
+}
