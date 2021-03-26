@@ -77,21 +77,23 @@ class _SearchViewState extends State<SearchView> {
                         child: MaterialButton(
                           //color: Colors.orange.shade50,
                           onPressed: () {
-                            // showDialog(
-                            //   context: context,
-                            //   builder: (context) {
-                            //     return Dialog(
-                            //       shape: RoundedRectangleBorder(
-                            //           borderRadius: BorderRadius.circular(40)),
-                            //       elevation: 16,
-                            //       child: Container(
-                            //         height: 400.0,
-                            //         width: 360.0,
-                            //         child: RecipeView(_recipes[index]),
-                            //       ),
-                            //     );
-                            //   },
-                            // );
+                            showDialog(
+                              context: context,
+                              builder: (context) {
+                                return Dialog(
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10)),
+                                  elevation: 16,
+                                  child: Container(
+                                    height: MediaQuery.of(context).size.height /
+                                        1.2,
+                                    width: MediaQuery.of(context).size.height /
+                                        1.1,
+                                    child: RecipeView(_recipes[index]),
+                                  ),
+                                );
+                              },
+                            );
                           },
                           child: Text(
                             '${_recipes[index].title}',
