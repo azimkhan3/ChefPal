@@ -18,13 +18,9 @@ class _IngredientViewState extends State<IngredientView> {
           children: [
             Text("Ingredient Page"),
             CustomDropdown(text: "Dairy"),
-            Spacer(),
             CustomDropdown(text: "Meats"),
-            Spacer(),
             CustomDropdown(text: "Spices"),
-            Spacer(),
             CustomDropdown(text: "Fruit"),
-            Spacer(),
             CustomDropdown(text: "Vegetables"),
           ],
         ),

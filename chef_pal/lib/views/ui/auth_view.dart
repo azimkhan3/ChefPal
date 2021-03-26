@@ -28,13 +28,13 @@ class _AuthentificationState extends State<Authentification> {
             Container(
               width: MediaQuery.of(context).size.width / 1.3,
               child: TextFormField(
-                style: TextStyle(color: Colors.white),
+                style: TextStyle(color: Colors.grey.shade700),
                 controller: _emailField,
                 decoration: InputDecoration(
                   hintText: "something@email.com",
-                  hintStyle: TextStyle(color: Colors.white),
+                  hintStyle: TextStyle(color: Colors.grey.shade400),
                   labelText: "Email",
-                  labelStyle: TextStyle(color: Colors.white),
+                  labelStyle: TextStyle(color: Colors.grey),
                 ),
               ),
             ),
@@ -46,14 +46,14 @@ class _AuthentificationState extends State<Authentification> {
             Container(
               width: MediaQuery.of(context).size.width / 1.3,
               child: TextFormField(
-                style: TextStyle(color: Colors.white),
+                style: TextStyle(color: Colors.grey.shade700),
                 controller: _passwordField,
                 obscureText: true, //blocks characters typed
                 decoration: InputDecoration(
                   hintText: "password",
-                  hintStyle: TextStyle(color: Colors.white),
+                  hintStyle: TextStyle(color: Colors.grey.shade400),
                   labelText: "Password",
-                  labelStyle: TextStyle(color: Colors.white),
+                  labelStyle: TextStyle(color: Colors.grey),
                 ),
               ),
             ),
@@ -80,7 +80,12 @@ class _AuthentificationState extends State<Authentification> {
                     );
                   }
                 },
-                child: Text("Register"),
+                child: Text(
+                  "Register",
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
+                ),
               ),
             ),
 
@@ -106,7 +111,12 @@ class _AuthentificationState extends State<Authentification> {
                     );
                   }
                 },
-                child: Text("Log In"),
+                child: Text(
+                  "Log In",
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
+                ),
               ),
             ),
           ],
