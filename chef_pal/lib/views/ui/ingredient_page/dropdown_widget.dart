@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 
 class CustomDropdown extends StatefulWidget {
   final String text;
-
-  const CustomDropdown({Key key, @required this.text}) : super(key: key);
+  final List<String> ingredients;
+  const CustomDropdown({Key key, @required this.text, this.ingredients})
+      : super(key: key);
 
   @override
   _CustomDropdownState createState() => _CustomDropdownState();
@@ -11,13 +12,15 @@ class CustomDropdown extends StatefulWidget {
 
 class _CustomDropdownState extends State<CustomDropdown> {
   GlobalKey actionKey;
+  List<String> ingredients;
   double height, width, xPosition, yPosition;
   bool isDropdownOpened = false;
   OverlayEntry floatingDropdown;
-
+  //_CustomDropdownState(this.ingredients);
   @override
   void initState() {
     actionKey = LabeledGlobalKey(widget.text);
+
     super.initState();
   }
 
@@ -28,10 +31,6 @@ class _CustomDropdownState extends State<CustomDropdown> {
     Offset offset = renderBox.localToGlobal(Offset.zero);
     xPosition = offset.dx;
     yPosition = offset.dy;
-    print(height);
-    print(width);
-    print(xPosition);
-    print(yPosition);
   }
 
   OverlayEntry _createFloatingDropdown() {
@@ -43,6 +42,7 @@ class _CustomDropdownState extends State<CustomDropdown> {
         height: 4 * height + 40,
         child: DropDown(
           itemHeight: height,
+          ingredients: ingredients,
         ),
       );
     });
@@ -94,8 +94,9 @@ class _CustomDropdownState extends State<CustomDropdown> {
 
 class DropDown extends StatelessWidget {
   final double itemHeight;
-
-  const DropDown({Key key, this.itemHeight}) : super(key: key);
+  final List<String> ingredients;
+  const DropDown({Key key, this.itemHeight, this.ingredients})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -127,26 +128,12 @@ class DropDown extends StatelessWidget {
             ),
             child: Column(
               children: <Widget>[
-                DropDownItem.first(
-                  text: "Add new",
-                  iconData: Icons.add_circle_outline,
-                  isSelected: false,
-                ),
-                DropDownItem(
-                  text: "View Profile",
-                  iconData: Icons.person_outline,
-                  isSelected: false,
-                ),
-                DropDownItem(
-                  text: "Settings",
-                  iconData: Icons.settings,
-                  isSelected: false,
-                ),
-                DropDownItem.last(
-                  text: "Logout",
-                  iconData: Icons.exit_to_app,
-                  isSelected: true,
-                ),
+                for (String ingredient in ingredients)
+                  DropDownItem.first(
+                    text: ingredient,
+                    iconData: Icons.add_circle_outline,
+                    isSelected: false,
+                  ),
               ],
             ),
           ),

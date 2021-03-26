@@ -21,6 +21,7 @@ class RecipeView extends StatelessWidget {
               fontWeight: FontWeight.bold,
             ),
           ),
+          if (_recipe.imgLink.length > 0) Image.network(_recipe.imgLink),
           IngredientDisplay(_recipe),
           StepsDisplay(_recipe.steps),
         ],

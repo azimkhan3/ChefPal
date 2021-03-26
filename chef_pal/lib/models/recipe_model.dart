@@ -3,7 +3,7 @@ import 'package:chef_pal/models/recipe_steps_model.dart';
 
 class Recipe {
   final int id;
-  final String title, summary;
+  final String title, summary, imgLink;
   final List<RecipeStep> steps;
   final List<RecipeIngredient> ingredients;
 
@@ -13,6 +13,7 @@ class Recipe {
     this.summary = "",
     this.steps,
     this.ingredients,
+    this.imgLink = "",
   });
 
   factory Recipe.fromMap(Map<String, dynamic> map) {

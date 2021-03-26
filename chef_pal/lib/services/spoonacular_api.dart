@@ -12,8 +12,10 @@ class ApiService {
   static final ApiService instance = ApiService._instantiate();
   //Add base URL for the spoonacular API, endpoint and API Key as a constant
   final String _baseURL = "api.spoonacular.com";
-  static const String API_KEY = "a6ce9d76a0cb413cab0c9b5a8636407c";
-
+  //static const String API_KEY = "a6ce9d76a0cb413cab0c9b5a8636407c";
+  static const String API_KEY = "30f86d0d42554f14aa08180f664db122";
+  //a26b1f378c714d9d95f0df0f2997e14c
+  //ebd26db4189b436f9bd66117e3e8699c
   Future<List<Recipe>> searchRecipes(String query) async {
     Map<String, String> parameters = {
       'query': query,
@@ -81,6 +83,7 @@ class ApiService {
             summary: recipe['summary'],
             steps: stepList,
             ingredients: tempIngredients,
+            imgLink: recipe['image'],
           ),
         );
       }
@@ -121,10 +124,15 @@ class ApiService {
   // }
 
   Future<List<Recipe>> generateRecipes(List<String> ingredients) async {
+    print(ingredients);
     Map<String, String> parameters = {
-      'includeIngredients': ingredients.toString(),
-      'limitLicense': 'true',
+      'ingredients': ingredients
+          .toString()
+          .substring(1, ingredients.toString().length - 1),
+      'number': '5',
+      'limitLicense': true.toString(),
       'ranking': '1',
+      'ignorePantry': true.toString(),
       'apiKey': API_KEY,
     };
 
@@ -141,12 +149,23 @@ class ApiService {
       //http.get to retrieve the response
       var response = await http.get(uri, headers: headers);
       //decode the body of the response into a map
-      Map<String, dynamic> data = json.decode(response.body);
+      List<dynamic> data = json.decode(response.body);
 
       List<Recipe> recipes = [];
-
-      data['results']
-          .forEach((recipeMap) => recipes.add(Recipe.fromMap(recipeMap)));
+      for (dynamic recipe in data) {
+        recipes.add(
+          Recipe(
+            id: recipe['id'],
+            title: recipe['title'],
+            summary: "",
+            steps: [],
+            ingredients: [],
+            imgLink: recipe['image'],
+          ),
+        );
+      }
+      print(data.first['id']);
+      // data.forEach((recipeMap) => print(recipeMap.toString()));
       return recipes;
     } catch (err) {
       //If our response has error, we throw an error message
