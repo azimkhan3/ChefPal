@@ -10,7 +10,7 @@ class Recipe {
   Recipe({
     this.id,
     this.title,
-    this.summary,
+    this.summary = "",
     this.steps,
     this.ingredients,
   });
@@ -18,11 +18,11 @@ class Recipe {
   factory Recipe.fromMap(Map<String, dynamic> map) {
     //Recipe Object
     List<RecipeStep> tempSteps = [];
-    map['analyzedInstructions'][0]['steps'].forEach(
-      (step) => tempSteps.add(
-        RecipeStep.fromMap(step),
-      ),
-    );
+    // map['analyzedInstructions'][0]['steps'].forEach(
+    //   (step) => tempSteps.add(
+    //     RecipeStep.fromMap(step),
+    //   ),
+    // );
     List<RecipeIngredient> tempIngredients = [];
     map['extendedIngredients'].forEach(
       (ingredient) => tempIngredients.add(

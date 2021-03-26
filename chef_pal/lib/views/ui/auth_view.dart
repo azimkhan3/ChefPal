@@ -8,7 +8,7 @@ class Authentification extends StatefulWidget {
 }
 
 class _AuthentificationState extends State<Authentification> {
-  //captures tex fore textfields
+  //captures text for textfields
   TextEditingController _emailField = TextEditingController();
   TextEditingController _passwordField = TextEditingController();
 
