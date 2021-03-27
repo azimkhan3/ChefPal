@@ -16,7 +16,7 @@ flutter app for recipes
 
 ## Lib Layout
 
-In out lib folder which is our src folder for flutter we have 3 divisions. One being the class models that we use, one being the services, and the last being the views.
+In our lib folder which is our src folder for flutter we have 3 divisions. One being the class models that we use, one being the services, and the last being the views.
 
 ### Models
 
@@ -24,11 +24,11 @@ The models hold the classes for Recipes, Ingredients and Recipe Steps. These cla
 
 ### Services
 
-In our services flder we have the code for business logic such as connected to the Spoonaular API and making requests to it as well out out code for Firebase Authentification.
+In our services folder we have the code for business logic such as connected to the Spoonaular API and making requests to it as well out out code for Firebase Authentification.
 
 ### Views
 
-Our views folderis divided into utils and UI. Utils will hold any common widget that we may reuse for the app. The ui folder is then divided for different app pages if needed and holds all the frontend code for the app.
+Our views folder is divided into utils and UI. Utils will hold any common widget that we may reuse for the app. The ui folder is then divided for different app pages if needed and holds all the frontend code for the app.
 
 ---
 
@@ -91,3 +91,7 @@ Future<bool> register(String email, String password) async {
 ## Firebase
 
 Each user which is registered will have a unique user id. This user id will be used to assign each user a collection in our Firebase database to store their information. For more information on Firebase Firestore follow <a href="https://firebase.google.com/docs/firestore">Firestore Docs</a>
+
+## Unit Testing
+
+Unit Testing will be further implemented as the project grows inorder to maintain scalability. We are still in the process of learning the proper unit testing methods using Flutter. This should be addressed before demo 2.
