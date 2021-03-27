@@ -2,4 +2,92 @@
 
 flutter app for recipes
 
+## Setup
 
+<a href="https://flutter.dev/docs">Follow Flutter offcial docs for setup and installation</a>
+
+## Running
+
+```bash
+    flutter run
+```
+
+---
+
+## Lib Layout
+
+In out lib folder which is our src folder for flutter we have 3 divisions. One being the class models that we use, one being the services, and the last being the views.
+
+### Models
+
+The models hold the classes for Recipes, Ingredients and Recipe Steps. These classes are used for displaying Recipe Search data properly.
+
+### Services
+
+In our services flder we have the code for business logic such as connected to the Spoonaular API and making requests to it as well out out code for Firebase Authentification.
+
+### Views
+
+Our views folderis divided into utils and UI. Utils will hold any common widget that we may reuse for the app. The ui folder is then divided for different app pages if needed and holds all the frontend code for the app.
+
+---
+
+## API Calls
+
+The Spoonacular API is used to get recipe information upon requests by the user
+
+```dart
+    final String _baseURL = "api.spoonacular.com";
+
+    Map<String, String> parameters = {
+      'query': query,
+      'number': '15',
+      'fillIngredients': true.toString(),
+      'instructionsRequired': true.toString(),
+      'addRecipeInformation': true.toString(),
+      'apiKey': API_KEY,
+    };
+
+    Uri uri = Uri.https(
+      _baseURL,
+      '/recipes/complexSearch',
+      parameters,
+    );
+    Map<String, String> headers = {
+      HttpHeaders.contentTypeHeader: 'application/json',
+    };
+
+    try {
+      //http.get to retrieve the response
+      var response = await http.get(uri, headers: headers);
+      //decode the body of the response into a map
+      Map<String, dynamic> data = json.decode(response.body);
+
+      // ... remaining code
+```
+
+## Authentification
+
+```dart
+Future<bool> signIn(String email, String password) async {
+  try {
+    await FirebaseAuth.instance
+        .signInWithEmailAndPassword(email: email, password: password);
+    // ...
+}
+
+Future<bool> register(String email, String password) async {
+  try {
+    await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
+    // ...
+}
+```
+
+---
+
+## Firebase
+
+Each user which is registered will have a unique user id. This user id will be used to assign each user a collection in our Firebase database to store their information. For more information on Firebase Firestore follow <a href="https://firebase.google.com/docs/firestore">Firestore Docs</a>
