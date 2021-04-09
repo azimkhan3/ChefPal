@@ -1,5 +1,4 @@
 import 'dart:ui';
-
 import 'package:chef_pal/models/recipe_model.dart';
 import 'package:chef_pal/models/recipe_steps_model.dart';
 import 'package:chef_pal/services/spoonacular_api.dart';

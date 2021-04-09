@@ -1,6 +1,10 @@
-import 'package:chef_pal/views/ui/auth_view.dart';
+import 'package:chef_pal/services/firebase_auth.dart';
+import 'package:chef_pal/views/ui/auth_page/auth_view.dart';
+import 'package:chef_pal/views/ui/home_view.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -12,14 +16,38 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Chefpal',
-      theme: ThemeData(
-        primarySwatch: Colors.orange,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
+    return MultiProvider(
+      providers: [
+        Provider<AuthentificationService>(
+          create: (_) => AuthentificationService(FirebaseAuth.instance),
+        ),
+        StreamProvider(
+          create: (context) =>
+              context.read<AuthentificationService>().authStateChanges,
+          initialData: null,
+        )
+      ],
+      child: MaterialApp(
+        title: 'Chefpal',
+        theme: ThemeData(
+          primarySwatch: Colors.orange,
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+        ),
+        home: AuthentificationWrapper(),
       ),
-      home: Authentification(),
     );
     //home: Home();
+  }
+}
+
+class AuthentificationWrapper extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final firebaseUser = context.watch<User>();
+
+    if (firebaseUser != null) {
+      return HomeView();
+    }
+    return Authentification();
   }
 }

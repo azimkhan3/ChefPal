@@ -1,6 +1,7 @@
 import 'package:chef_pal/services/firebase_auth.dart';
 import 'package:chef_pal/views/ui/home_view.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class Authentification extends StatefulWidget {
   @override
@@ -9,8 +10,8 @@ class Authentification extends StatefulWidget {
 
 class _AuthentificationState extends State<Authentification> {
   //captures text for textfields
-  TextEditingController _emailField = TextEditingController();
-  TextEditingController _passwordField = TextEditingController();
+  final TextEditingController _emailField = TextEditingController();
+  final TextEditingController _passwordField = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -70,18 +71,14 @@ class _AuthentificationState extends State<Authentification> {
               ),
               child: MaterialButton(
                 color: Colors.orange.shade400,
-                onPressed: () async {
-                  bool shouldNavigate =
-                      await register(_emailField.text, _passwordField.text);
-                  if (shouldNavigate) {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => HomeView()),
-                    );
-                  }
+                onPressed: () {
+                  context.read<AuthentificationService>().signIn(
+                        _emailField.text.trim(),
+                        _passwordField.text.trim(),
+                      );
                 },
                 child: Text(
-                  "Register",
+                  "Login",
                   style: TextStyle(
                     color: Colors.white,
                   ),
@@ -101,18 +98,14 @@ class _AuthentificationState extends State<Authentification> {
               ),
               child: MaterialButton(
                 color: Colors.orange.shade400,
-                onPressed: () async {
-                  bool shouldNavigate =
-                      await signIn(_emailField.text, _passwordField.text);
-                  if (shouldNavigate) {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => HomeView()),
-                    );
-                  }
+                onPressed: () {
+                  context.read<AuthentificationService>().signUp(
+                        _emailField.text.trim(),
+                        _passwordField.text.trim(),
+                      );
                 },
                 child: Text(
-                  "Log In",
+                  "Register",
                   style: TextStyle(
                     color: Colors.white,
                   ),

@@ -1,4 +1,5 @@
 import 'package:chef_pal/views/ui/ingredient_page/ingredient_view.dart';
+import 'package:chef_pal/views/ui/profile_page/profile_view.dart';
 import 'package:chef_pal/views/ui/search_page/search_view.dart';
 import 'package:chef_pal/views/utils/placeholder_widget.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +17,7 @@ class _HomeViewState extends State<HomeView> {
     IngredientView(),
     SearchView(),
     PlaceholderWidget(Colors.green),
-    PlaceholderWidget(Colors.blue)
+    ProfileView(),
   ];
 
   @override
