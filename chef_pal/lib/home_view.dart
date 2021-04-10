@@ -1,7 +1,7 @@
-import 'package:chef_pal/views/ui/ingredient_page/ingredient_view.dart';
-import 'package:chef_pal/views/ui/profile_page/profile_view.dart';
-import 'package:chef_pal/views/ui/search_page/search_view.dart';
-import 'package:chef_pal/views/utils/placeholder_widget.dart';
+import 'package:chef_pal/ingredient_selection/ingredient_view.dart';
+import 'package:chef_pal/profile/profile_view.dart';
+import 'package:chef_pal/recipe_search/search_view.dart';
+import 'package:chef_pal/utils/placeholder_widget.dart';
 import 'package:flutter/material.dart';
 
 class HomeView extends StatefulWidget {

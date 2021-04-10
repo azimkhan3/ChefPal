@@ -1,7 +1,6 @@
-import 'package:chef_pal/models/recipe_model.dart';
-import 'package:chef_pal/services/spoonacular_api.dart';
-import 'package:chef_pal/views/ui/search_page/recipe_display.dart';
-import 'package:chef_pal/views/ui/search_page/recipe_search_widget.dart';
+import 'package:chef_pal/recipe_search/recipe_display.dart';
+import 'package:chef_pal/recipe_search/recipe_model.dart';
+import 'package:chef_pal/recipe_search/spoonacular_api.dart';
 import 'package:flutter/material.dart';
 
 class SearchView extends StatefulWidget {

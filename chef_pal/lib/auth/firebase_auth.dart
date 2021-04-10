@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthentificationService {
@@ -28,10 +29,19 @@ class AuthentificationService {
 
   Future<String> signUp(String email, String password) async {
     try {
-      await _firebaseAuth.createUserWithEmailAndPassword(
+      UserCredential user = await _firebaseAuth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
+      print("hi");
+      print(user.user.uid);
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(user.user.uid)
+          .set({"ingredients": {}})
+          .then((value) => print("User Added"))
+          .catchError((error) => print("Failed to add user: $error"));
+
       return "Signed Up";
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {

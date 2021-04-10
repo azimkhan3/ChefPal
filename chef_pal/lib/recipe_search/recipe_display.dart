@@ -1,7 +1,5 @@
 import 'dart:ui';
-import 'package:chef_pal/models/recipe_model.dart';
-import 'package:chef_pal/models/recipe_steps_model.dart';
-import 'package:chef_pal/services/spoonacular_api.dart';
+import 'package:chef_pal/recipe_search/recipe_model.dart';
 import 'package:flutter/material.dart';
 
 class RecipeView extends StatelessWidget {

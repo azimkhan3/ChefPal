@@ -1,14 +1,13 @@
-import 'package:chef_pal/services/firebase_auth.dart';
-import 'package:chef_pal/views/ui/home_view.dart';
+import 'package:chef_pal/auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class Authentification extends StatefulWidget {
+class AuthentificationView extends StatefulWidget {
   @override
-  _AuthentificationState createState() => _AuthentificationState();
+  _AuthentificationViewState createState() => _AuthentificationViewState();
 }
 
-class _AuthentificationState extends State<Authentification> {
+class _AuthentificationViewState extends State<AuthentificationView> {
   //captures text for textfields
   final TextEditingController _emailField = TextEditingController();
   final TextEditingController _passwordField = TextEditingController();

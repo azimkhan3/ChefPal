@@ -1,6 +1,6 @@
-import 'package:chef_pal/services/firebase_auth.dart';
-import 'package:chef_pal/views/ui/auth_page/auth_view.dart';
-import 'package:chef_pal/views/ui/home_view.dart';
+import 'package:chef_pal/auth/auth_view.dart';
+import 'package:chef_pal/auth/firebase_auth.dart';
+import 'package:chef_pal/home_view.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -48,6 +48,7 @@ class AuthentificationWrapper extends StatelessWidget {
     if (firebaseUser != null) {
       return HomeView();
     }
-    return Authentification();
+
+    return AuthentificationView();
   }
 }

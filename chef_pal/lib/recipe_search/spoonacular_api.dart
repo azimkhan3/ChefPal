@@ -1,8 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:chef_pal/models/recipe_ingredient_model.dart';
-import 'package:chef_pal/models/recipe_model.dart';
-import 'package:chef_pal/models/recipe_steps_model.dart';
+import 'package:chef_pal/recipe_search/recipe_model.dart';
 import 'package:http/http.dart' as http;
 
 class ApiService {

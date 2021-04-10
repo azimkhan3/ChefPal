@@ -8,9 +8,9 @@
     "Kidney Beans",
     "Cauliflower"
   ],
-  "Dairy": [],
-  "Starches": [],
-  "Meat": [],
-  "Seafood": [],
-  "Spices": []
+  "Dairy": ["Milk", "Cheese", "Yogurt"],
+  "Starches": ["Bread"],
+  "Meat": ["Chicken", "Beef", "Lamb", "Eggs"],
+  "Seafood": ["Salmon", "Shrimp", "Crab", "Flounder"],
+  "Spices": ["Cumin", "Tumeric", "Rosamary"]
 }
