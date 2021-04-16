@@ -1,6 +1,8 @@
 import 'package:chef_pal/auth/auth_view.dart';
 import 'package:chef_pal/auth/firebase_auth.dart';
 import 'package:chef_pal/home_view.dart';
+import 'package:chef_pal/ingredient_selection/firestore.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -20,6 +22,9 @@ class MyApp extends StatelessWidget {
       providers: [
         Provider<AuthentificationService>(
           create: (_) => AuthentificationService(FirebaseAuth.instance),
+        ),
+        Provider<FirestoreService>(
+          create: (_) => FirestoreService(FirebaseFirestore.instance),
         ),
         StreamProvider(
           create: (context) =>
