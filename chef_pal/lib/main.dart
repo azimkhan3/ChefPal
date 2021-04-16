@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
           create: (context) =>
               context.read<AuthentificationService>().authStateChanges,
           initialData: null,
-        )
+        ),
       ],
       child: MaterialApp(
         title: 'Chefpal',
@@ -48,7 +48,6 @@ class AuthentificationWrapper extends StatelessWidget {
     if (firebaseUser != null) {
       return HomeView();
     }
-
     return AuthentificationView();
   }
 }
