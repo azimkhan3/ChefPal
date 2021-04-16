@@ -1,4 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 
 class FirestoreService {
   final FirebaseFirestore _firebaseFirestore;
@@ -17,5 +19,12 @@ class FirestoreService {
 
     // Call the user's CollectionReference to add a new user
     users.add(user);
+  }
+
+  Future<void> updateIngredients(User user, Map<String, dynamic> data) {
+    return _firebaseFirestore
+        .collection('users')
+        .doc(user.uid)
+        .update({'ingredients': data});
   }
 }
