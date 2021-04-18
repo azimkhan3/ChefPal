@@ -23,9 +23,6 @@ class MyApp extends StatelessWidget {
         Provider<AuthentificationService>(
           create: (_) => AuthentificationService(FirebaseAuth.instance),
         ),
-        Provider<FirestoreService>(
-          create: (_) => FirestoreService(FirebaseFirestore.instance),
-        ),
         StreamProvider(
           create: (context) =>
               context.read<AuthentificationService>().authStateChanges,
@@ -51,7 +48,25 @@ class AuthentificationWrapper extends StatelessWidget {
     final firebaseUser = context.watch<User>();
 
     if (firebaseUser != null) {
-      return HomeView();
+      // return MultiProvider(
+      //   providers: [
+      //     Provider<FirestoreService>(
+      //       create: (_) => FirestoreService(firebaseUser.uid),
+      //     ),
+      //     StreamProvider.value(
+      //         value: context.read<FirestoreService>().ingredients,
+      //         initialData: null)
+      //   ],
+      //   child: HomeView(),
+      // );
+      return Provider<FirestoreService>(
+        create: (_) => FirestoreService(firebaseUser.uid),
+        child: StreamProvider<Map<String, dynamic>>.value(
+          value: FirestoreService(firebaseUser.uid).ingredients,
+          initialData: null,
+          child: HomeView(),
+        ),
+      );
     }
     return AuthentificationView();
   }

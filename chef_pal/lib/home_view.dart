@@ -14,7 +14,7 @@ class HomeView extends StatefulWidget {
 class _HomeViewState extends State<HomeView> {
   int _currentIndex = 0;
   final List<Widget> _children = [
-    IngredientView(),
+    IngredientsView(),
     SearchView(),
     PlaceholderWidget(Colors.green),
     ProfileView(),

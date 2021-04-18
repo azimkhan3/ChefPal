@@ -1,3 +1,4 @@
+import 'package:chef_pal/ingredient_selection/firestore.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -34,13 +35,7 @@ class AuthentificationService {
         password: password,
       );
       print("hi");
-      print(user.user.uid);
-      await FirebaseFirestore.instance
-          .collection('users')
-          .doc(user.user.uid)
-          .set({"ingredients": {}})
-          .then((value) => print("User Added"))
-          .catchError((error) => print("Failed to add user: $error"));
+      await FirestoreService(user.user.uid).initUser();
 
       return "Signed Up";
     } on FirebaseAuthException catch (e) {

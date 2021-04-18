@@ -2,7 +2,37 @@ import 'package:chef_pal/ingredient_selection/dropdown_widget.dart';
 import 'package:chef_pal/recipe_search/recipe_display.dart';
 import 'package:chef_pal/recipe_search/recipe_model.dart';
 import 'package:chef_pal/recipe_search/spoonacular_api.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+class IngredientsView extends StatefulWidget {
+  IngredientsView({Key key}) : super(key: key);
+
+  @override
+  _IngredientsViewState createState() => _IngredientsViewState();
+}
+
+class _IngredientsViewState extends State<IngredientsView> {
+  @override
+  Widget build(BuildContext context) {
+    final ingredients = Provider.of<Map<String, dynamic>>(context);
+    List<Widget> categories = [];
+    ingredients.keys.forEach((element) {
+      categories.add(Text(element));
+    });
+    return Padding(
+      padding: const EdgeInsets.all(100),
+      child: Container(
+        alignment: Alignment.center,
+        height: MediaQuery.of(context).size.height,
+        child: Column(
+          children: categories,
+        ),
+      ),
+    );
+  }
+}
 
 class IngredientView extends StatefulWidget {
   IngredientView({Key key}) : super(key: key);
