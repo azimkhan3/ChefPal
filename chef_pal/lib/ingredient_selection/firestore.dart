@@ -7,8 +7,8 @@ class FirestoreService {
   final uid;
   FirestoreService(this.uid);
 
-  Future<void> updateIngredients(User user, Map<String, dynamic> data) {
-    return _db.collection('users').doc(user.uid).update({'ingredients': data});
+  Future<void> updateIngredients(Map<String, dynamic> data) {
+    return _db.collection('users').doc(uid).set({'ingredients': data});
   }
 
   //create user
