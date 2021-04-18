@@ -122,6 +122,7 @@ class IngredientDropDownItem extends StatelessWidget {
                     Text(ingredient),
                     GestureDetector(
                       onTap: () {
+                        // TODO
                         ingredients[category][ingredient] =
                             !ingredients[category][ingredient];
                         print(ingredients);
