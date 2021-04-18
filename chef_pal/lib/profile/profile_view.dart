@@ -9,7 +9,8 @@ class ProfileView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: Container(
-        width: MediaQuery.of(context).size.width / 1.4,
+        alignment: Alignment.center,
+        width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15.0),
           color: Colors.white,
