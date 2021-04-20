@@ -13,6 +13,15 @@ class Recipe {
     this.imgLink = "",
   });
 
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'title': title,
+      'summary': summary,
+      'imgLink': imgLink,
+    };
+  }
+
   factory Recipe.fromMap(Map<String, dynamic> map) {
     //Recipe Object
     List<RecipeStep> tempSteps = [];
