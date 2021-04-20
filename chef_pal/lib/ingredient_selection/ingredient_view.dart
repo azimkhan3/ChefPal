@@ -14,9 +14,7 @@ class _IngredientsViewState extends State<IngredientsView> {
   @override
   Widget build(BuildContext context) {
     final ingredients = Provider.of<Map<String, dynamic>>(context);
-    List<bool> expanded = List.filled(ingredients.keys.length, false);
     List<Widget> categories = [];
-    int count = 0;
     ingredients.keys.forEach((category) {
       categories.add(
         ChangeNotifierProvider<Expanded>(
@@ -122,10 +120,11 @@ class IngredientDropDownItem extends StatelessWidget {
                     Text(ingredient),
                     GestureDetector(
                       onTap: () {
-                        // TODO
+                        // TODO Make it update onpress
                         ingredients[category][ingredient] =
                             !ingredients[category][ingredient];
                         print(ingredients);
+
                         context
                             .read<FirestoreService>()
                             .updateIngredients(ingredients);
