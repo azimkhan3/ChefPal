@@ -103,6 +103,18 @@ class FirestoreService {
         .catchError((err) => print(err));
   }
 
+  Future<void> unfavoriteRecipe(Recipe recipe) async {
+    //favoriteRecipeList(recipe);
+    return await _db
+        .collection('Users')
+        .doc(uid)
+        .collection('SavedRecipes')
+        .doc(recipe.id.toString())
+        .delete()
+        .then((value) => print('unfavorited recipe: ${recipe.id}'))
+        .catchError((err) => print(err));
+  }
+
   Future<void> favoriteRecipeList(Recipe recipe, List<dynamic> recipes) async {
     return await _db
         .collection('Users')

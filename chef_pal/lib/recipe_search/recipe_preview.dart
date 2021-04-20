@@ -55,13 +55,26 @@ class RecipePreview extends StatelessWidget {
                   ],
                 ),
               ),
-              GestureDetector(
-                onTap: () {
-                  context.read<FirestoreService>().favoriteRecipe(recipe);
-                },
-                child: Icon(
-                  Icons.favorite_outline,
-                  color: Colors.grey,
+              Consumer<List<int>>(
+                builder: (_, recipeIds, __) => GestureDetector(
+                  onTap: () {
+                    recipeIds.contains(recipe.id)
+                        ? context
+                            .read<FirestoreService>()
+                            .unfavoriteRecipe(recipe)
+                        : context
+                            .read<FirestoreService>()
+                            .favoriteRecipe(recipe);
+                  },
+                  child: recipeIds.contains(recipe.id)
+                      ? Icon(
+                          Icons.favorite,
+                          color: Colors.pink,
+                        )
+                      : Icon(
+                          Icons.favorite_outline,
+                          color: Colors.grey,
+                        ),
                 ),
               )
             ],
