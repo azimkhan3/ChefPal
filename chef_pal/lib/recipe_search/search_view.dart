@@ -1,4 +1,5 @@
 import 'package:chef_pal/recipe_search/recipe_display.dart';
+import 'package:chef_pal/recipe_search/recipe_list_widget.dart';
 import 'package:chef_pal/recipe_search/recipe_model.dart';
 import 'package:chef_pal/recipe_search/recipe_preview.dart';
 import 'package:chef_pal/recipe_search/spoonacular_api.dart';
@@ -44,45 +45,8 @@ class RecipeSearchDisplay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<SearchResult>(
-      builder: (_, recipes, __) => Expanded(
-        child: SizedBox(
-          child: ListView.builder(
-            itemCount: recipes.recipes.length,
-            itemBuilder: (BuildContext context, int index) {
-              return RecipePreview(recipe: recipes.recipes[index]);
-              // return Container(
-              //   height: 50,
-              //   //color: Colors.amber[colorCodes[index]],
-              //   child: MaterialButton(
-              //     //color: Colors.orange.shade50,
-              //     onPressed: () {
-              //       showDialog(
-              //         context: context,
-              //         builder: (context) {
-              //           return Dialog(
-              //             shape: RoundedRectangleBorder(
-              //                 borderRadius: BorderRadius.circular(10)),
-              //             elevation: 16,
-              //             child: Container(
-              //               height: MediaQuery.of(context).size.height / 1.2,
-              //               width: MediaQuery.of(context).size.height / 1.1,
-              //               child: RecipeView(recipes.recipes[index]),
-              //             ),
-              //           );
-              //         },
-              //       );
-              //     },
-              //     child: Text(
-              //       '${recipes.recipes[index].title}',
-              //       style: TextStyle(
-              //         color: Colors.grey.shade900,
-              //       ),
-              //     ),
-              //   ),
-              // );
-            },
-          ),
-        ),
+      builder: (_, recipes, __) => RecipeListWidget(
+        recipes: recipes.recipes,
       ),
     );
   }
