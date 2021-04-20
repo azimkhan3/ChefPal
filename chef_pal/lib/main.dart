@@ -60,11 +60,21 @@ class AuthentificationWrapper extends StatelessWidget {
       // );
       return Provider<FirestoreService>(
         create: (_) => FirestoreService(firebaseUser.uid),
-        child: StreamProvider<Map<String, dynamic>>.value(
-          value: FirestoreService(firebaseUser.uid).ingredients,
-          initialData: null,
-          child: HomeView(),
-        ),
+        child: HomeView(),
+        // MultiProvider(
+        //   providers: [
+        //     StreamProvider.value(
+        //       value:  FirestoreService(firebaseUser.uid).ingredients,
+        //       initialData: null,
+        //     ),
+        //   ],
+        //   child: HomeView(),
+        // ),
+        // StreamProvider<Map<String, dynamic>>.value(
+        //   value: FirestoreService(firebaseUser.uid).ingredients,
+        //   initialData: null,
+        //   child: HomeView(),
+        // ),
       );
     }
     return AuthentificationView();
