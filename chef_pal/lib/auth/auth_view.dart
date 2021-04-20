@@ -1,6 +1,5 @@
 import 'package:chef_pal/auth/firebase_auth.dart';
 import 'package:chef_pal/utils/loading.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
