@@ -24,9 +24,10 @@ class SavedRecipesView extends StatelessWidget {
                 fontSize: MediaQuery.of(context).size.width / 15,
               ),
             ),
-            RecipeListWidget(
-              recipes: savedRecipes,
-            )
+            if (savedRecipes != null)
+              RecipeListWidget(
+                recipes: savedRecipes,
+              )
           ],
         ),
       ),

@@ -1,6 +1,7 @@
 import 'package:chef_pal/ingredient_selection/firestore.dart';
 import 'package:chef_pal/recipe_search/recipe_display.dart';
 import 'package:chef_pal/recipe_search/recipe_model.dart';
+import 'package:chef_pal/utils/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -56,26 +57,31 @@ class RecipePreview extends StatelessWidget {
                 ),
               ),
               Consumer<List<int>>(
-                builder: (_, recipeIds, __) => GestureDetector(
-                  onTap: () {
-                    recipeIds.contains(recipe.id)
-                        ? context
-                            .read<FirestoreService>()
-                            .unfavoriteRecipe(recipe)
-                        : context
-                            .read<FirestoreService>()
-                            .favoriteRecipe(recipe);
-                  },
-                  child: recipeIds.contains(recipe.id)
-                      ? Icon(
-                          Icons.favorite,
-                          color: Colors.pink,
-                        )
-                      : Icon(
-                          Icons.favorite_outline,
-                          color: Colors.grey,
-                        ),
-                ),
+                builder: (_, recipeIds, __) => recipeIds == null
+                    ? Icon(
+                        Icons.favorite_outline,
+                        color: Colors.grey,
+                      )
+                    : GestureDetector(
+                        onTap: () {
+                          recipeIds.contains(recipe.id)
+                              ? context
+                                  .read<FirestoreService>()
+                                  .unfavoriteRecipe(recipe)
+                              : context
+                                  .read<FirestoreService>()
+                                  .favoriteRecipe(recipe);
+                        },
+                        child: recipeIds.contains(recipe.id)
+                            ? Icon(
+                                Icons.favorite,
+                                color: Colors.pink,
+                              )
+                            : Icon(
+                                Icons.favorite_outline,
+                                color: Colors.grey,
+                              ),
+                      ),
               )
             ],
           ),

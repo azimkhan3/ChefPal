@@ -12,6 +12,18 @@ class SearchResult with ChangeNotifier {
     recipes = await ApiService.instance.searchRecipes(search);
     notifyListeners();
   }
+
+  void ingredientSearch(Map<String, dynamic> ingredientsMap) async {
+    List<String> ingredients = [];
+    ingredientsMap.forEach((category, value) {
+      value.forEach((ingredient, status) {
+        if (status) ingredients.add(ingredient);
+      });
+    });
+    print(ingredients);
+    recipes = await ApiService.instance.generateRecipes(ingredients);
+    notifyListeners();
+  }
 }
 
 class SearchView extends StatelessWidget {
@@ -64,6 +76,7 @@ class _SearchBarState extends State<SearchBar> {
   Widget build(BuildContext context) {
     TextEditingController _searchField = TextEditingController();
     final recipes = Provider.of<SearchResult>(context, listen: false);
+    final ingredients = Provider.of<Map<String, dynamic>>(context);
     return Column(
       children: [
         Container(
@@ -90,6 +103,26 @@ class _SearchBarState extends State<SearchBar> {
             },
             child: Text(
               "Search",
+              style: TextStyle(
+                color: Colors.white,
+              ),
+            ),
+          ),
+        ),
+        Container(
+          width: MediaQuery.of(context).size.width / 1.4,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(15.0),
+            color: Colors.white,
+          ),
+          child: MaterialButton(
+            color: Colors.orange.shade400,
+            onPressed: () async {
+              print(ingredients);
+              recipes.ingredientSearch(ingredients);
+            },
+            child: Text(
+              "Ingredient Based Search",
               style: TextStyle(
                 color: Colors.white,
               ),

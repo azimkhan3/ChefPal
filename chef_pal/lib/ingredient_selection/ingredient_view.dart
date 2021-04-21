@@ -25,14 +25,29 @@ class _IngredientsViewState extends State<IngredientsView> {
         ),
       );
     });
-    return Padding(
-      padding: EdgeInsets.only(top: MediaQuery.of(context).size.height / 15),
-      child: Container(
-        alignment: Alignment.center,
-        height: MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.width,
+    return Container(
+      alignment: Alignment.center,
+      height: MediaQuery.of(context).size.height,
+      width: MediaQuery.of(context).size.width,
+      child: Padding(
+        padding: EdgeInsets.only(top: MediaQuery.of(context).size.height / 12),
         child: Column(
-          children: categories,
+          children: [
+            Padding(
+              padding: EdgeInsets.only(
+                  bottom: MediaQuery.of(context).size.height / 20),
+              child: Text(
+                "Ingredient Selection",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: MediaQuery.of(context).size.width / 15,
+                ),
+              ),
+            ),
+            Column(
+              children: categories,
+            ),
+          ],
         ),
       ),
     );
@@ -57,7 +72,12 @@ class IngredientDropDown extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(category),
+              Text(
+                category,
+                style: TextStyle(
+                  fontSize: MediaQuery.of(context).size.width / 25,
+                ),
+              ),
               Consumer<Expanded>(
                 builder: (_, expanded, __) => expanded.expanded
                     ? Icon(Icons.arrow_drop_up)
@@ -117,10 +137,14 @@ class IngredientDropDownItem extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(ingredient),
+                    Text(
+                      ingredient,
+                      style: TextStyle(
+                        fontSize: MediaQuery.of(context).size.width / 30,
+                      ),
+                    ),
                     GestureDetector(
                       onTap: () {
-                        // TODO Make it update onpress
                         ingredients[category][ingredient] =
                             !ingredients[category][ingredient];
                         print(ingredients);
