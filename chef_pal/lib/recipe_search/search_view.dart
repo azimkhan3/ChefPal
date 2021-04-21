@@ -1,7 +1,5 @@
-import 'package:chef_pal/recipe_search/recipe_display.dart';
 import 'package:chef_pal/recipe_search/recipe_list_widget.dart';
 import 'package:chef_pal/recipe_search/recipe_model.dart';
-import 'package:chef_pal/recipe_search/recipe_preview.dart';
 import 'package:chef_pal/recipe_search/spoonacular_api.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

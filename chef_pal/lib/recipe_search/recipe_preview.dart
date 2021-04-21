@@ -1,7 +1,6 @@
 import 'package:chef_pal/ingredient_selection/firestore.dart';
 import 'package:chef_pal/recipe_search/recipe_display.dart';
 import 'package:chef_pal/recipe_search/recipe_model.dart';
-import 'package:chef_pal/utils/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
