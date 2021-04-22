@@ -52,14 +52,60 @@ class FirestoreService {
   //List Recipe
   List<Recipe> _savedRecipesFromSnapshot(QuerySnapshot snapshot) {
     List<Recipe> recipes = [];
-    snapshot.docs.forEach((recipe) {
-      recipes.add(Recipe(
-        id: recipe.get('id'),
-        title: recipe.get('title'),
-        summary: recipe.get('summary'),
-        imgLink: recipe.get('imgLink'),
-      ));
-    });
+    List<RecipeIngredient> recipeIngredients;
+    List<RecipeStep> recipeSteps;
+    try {
+      snapshot.docs.forEach((recipe) {
+        recipeIngredients = [];
+        recipeSteps = [];
+
+        List<dynamic> stepsData = recipe.get('steps');
+        stepsData.forEach((step) {
+          recipeSteps.add(
+            RecipeStep(
+              number: step['number'],
+              step: step['step'],
+              ingredients:
+                  step['ingredients'].cast<String>(), //fix this  type error
+            ),
+          );
+        });
+
+        List<dynamic> ingredientsData = recipe.get('ingredients');
+        ingredientsData.forEach((ingredient) {
+          recipeIngredients.add(
+            RecipeIngredient(
+              amount: double.parse(ingredient['amount'].toString()),
+              name: ingredient['name'],
+              original: ingredient['original'],
+              units: ingredient['units'],
+            ),
+          );
+        });
+
+        recipes.add(
+          Recipe(
+            id: recipe.get('id'),
+            title: recipe.get('title'),
+            readyInMinutes: recipe.get('readyInMinutes'),
+            summary: recipe.get('summary'),
+            steps: recipeSteps,
+            ingredients: recipeIngredients,
+            imgLink: recipe.get('imgLink'),
+            vegetarian: recipe.get('vegetarian'),
+            vegan: recipe.get('vegan'),
+            glutenFree: recipe.get('glutenFree'),
+            dairyFree: recipe.get('dairyFree'),
+            veryHealthy: recipe.get('veryHealthy'),
+            cheap: recipe.get('cheap'),
+            veryPopular: recipe.get('veryPopular'),
+            sustainable: recipe.get('sustainable'),
+          ),
+        );
+      });
+    } catch (err) {
+      throw err.toString();
+    }
 
     return recipes;
   }
