@@ -38,7 +38,7 @@ class ApiService {
       var response = await http.get(uri, headers: headers);
       //decode the body of the response into a map
       Map<String, dynamic> data = json.decode(response.body);
-      print(data.entries.first.value);
+      // print(data.entries.first.value);
 
       List<Recipe> recipes = [];
       List<RecipeStep> stepList;
@@ -61,13 +61,13 @@ class ApiService {
   }
 
   Future<List<Recipe>> generateRecipes(List<String> ingredients) async {
-    print(ingredients);
+    // print(ingredients);
     Map<String, String> parameters = {
       'ingredients': ingredients
           .toString()
           .substring(1, ingredients.toString().length - 1)
           .replaceAll(new RegExp(r"\s+"), ""),
-      'number': '5',
+      'number': '10',
       'limitLicense': true.toString(),
       'ranking': '1',
       'ignorePantry': true.toString(),
@@ -104,7 +104,7 @@ class ApiService {
   }
 
   Future<List<Recipe>> getRecipeInformationBulk(List<String> recipeIds) async {
-    print(recipeIds.toString());
+    // print(recipeIds.toString());
     Map<String, String> parameters = {
       'ids': recipeIds
           .toString()
@@ -134,7 +134,7 @@ class ApiService {
       List<dynamic> data = json.decode(response.body);
 
       List<Recipe> recipes = [];
-      print(data.length);
+      // print(data.length);
       for (dynamic recipe in data) {
         if (recipe['instructions'] == null) continue;
         if (recipe['analyzedInstructions'].toString() == '[]') continue;
@@ -156,7 +156,7 @@ class ApiService {
     List<String> ingredientsList = [];
     // ignore recipe if id doesnt have instructions
 
-    print(recipe['analyzedInstructions']);
+    // print(recipe['analyzedInstructions']);
     for (dynamic step in recipe['analyzedInstructions'][0]['steps']) {
       // get ingredients used in each step
       ingredientsList = [];

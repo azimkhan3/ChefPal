@@ -116,7 +116,7 @@ class _SearchBarState extends State<SearchBar> {
           child: MaterialButton(
             color: Colors.orange.shade400,
             onPressed: () async {
-              print(ingredients);
+              // print(ingredients);
               recipes.ingredientSearch(ingredients);
             },
             child: Text(
