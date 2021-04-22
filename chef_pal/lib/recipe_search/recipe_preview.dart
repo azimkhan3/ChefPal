@@ -11,7 +11,7 @@ class RecipePreview extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height / 15,
+      height: MediaQuery.of(context).size.height / 13,
       child: Card(
         child: Padding(
           padding: const EdgeInsets.all(10.0),
@@ -52,6 +52,18 @@ class RecipePreview extends StatelessWidget {
                         maxLines: 1,
                       ),
                     ),
+                    Container(
+                      width: MediaQuery.of(context).size.width / 1.5,
+                      child: Text(
+                        "Ready Time: ${recipe.readyInMinutes.toString()} Minutes",
+                        style: TextStyle(
+                            fontSize: MediaQuery.of(context).size.height / 75,
+                            fontWeight: FontWeight.w300),
+                        textAlign: TextAlign.left,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
+                      ),
+                    )
                   ],
                 ),
               ),
