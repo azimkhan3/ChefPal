@@ -1,24 +1,65 @@
 class Recipe {
-  final int id;
+  final int id, readyInMinutes;
   final String title, summary, imgLink;
+  final List<String> cuisines, dishTypes, diets;
   final List<RecipeStep> steps;
   final List<RecipeIngredient> ingredients;
+  final bool vegetarian,
+      vegan,
+      glutenFree,
+      dairyFree,
+      veryHealthy,
+      cheap,
+      veryPopular,
+      sustainable;
 
   Recipe({
     this.id,
     this.title,
+    this.readyInMinutes,
     this.summary = "",
     this.steps,
     this.ingredients,
     this.imgLink = "",
+    this.vegetarian,
+    this.vegan,
+    this.glutenFree,
+    this.dairyFree,
+    this.veryHealthy,
+    this.cheap,
+    this.veryPopular,
+    this.sustainable,
+    this.cuisines,
+    this.dishTypes,
+    this.diets,
   });
 
   Map<String, dynamic> toMap() {
+    List<dynamic> ingreds = [];
+    List<dynamic> storeSteps = [];
+
+    ingredients.forEach((ingredient) => ingreds.add(ingredient.toMap()));
+    steps.forEach((step) => storeSteps.add(step.toMap()));
+
     return {
       'id': id,
       'title': title,
+      'readyInMinutes': readyInMinutes,
       'summary': summary,
+      'steps': steps,
+      'ingredients': ingredients,
       'imgLink': imgLink,
+      'vegetarian': vegetarian,
+      'vegan': vegan,
+      'glutenFree': glutenFree,
+      'dairyFree': dairyFree,
+      'veryHealthy': veryHealthy,
+      'cheap': cheap,
+      'veryPopular': veryPopular,
+      'sustainable': sustainable,
+      'cuisines': cuisines,
+      'dishTypes': dishTypes,
+      'diets': diets
     };
   }
 
@@ -44,6 +85,12 @@ class Recipe {
       ingredients: tempIngredients,
     );
   }
+
+  @override
+  String toString() {
+    // TODO: implement toString for Recipe
+    return super.toString();
+  }
 }
 
 class RecipeIngredient {
@@ -56,6 +103,15 @@ class RecipeIngredient {
     this.units = "",
     this.amount = 0.0,
   });
+
+  Map<String, dynamic> toMap() {
+    return {
+      'name': name,
+      'original': original,
+      'units': units,
+      'amount': amount,
+    };
+  }
 
   factory RecipeIngredient.fromMap(Map<String, dynamic> map) {
     return RecipeIngredient(
@@ -73,6 +129,14 @@ class RecipeStep {
   final List<String> ingredients;
 
   RecipeStep({this.number, this.step, this.ingredients});
+
+  Map<String, dynamic> toMap() {
+    return {
+      'number': number,
+      'step': step,
+      'ingredients': ingredients,
+    };
+  }
 
   factory RecipeStep.fromMap(Map<String, dynamic> map) {
     List<String> usedIngredients = [];
