@@ -2,6 +2,7 @@ import 'package:chef_pal/auth/firebase_auth.dart';
 import 'package:chef_pal/ingredient_selection/firestore.dart';
 import 'package:chef_pal/ingredient_selection/ingredient_view.dart';
 import 'package:chef_pal/profile/intolerences_widget.dart';
+import 'package:chef_pal/profile/update_profile_widget.dart';
 import 'package:chef_pal/profile/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -45,7 +46,14 @@ class ProfileView extends StatelessWidget {
               child: MaterialButton(
                 color: Colors.orange.shade700,
                 onPressed: () {
-                  context.read<AuthentificationService>().signOut();
+                  showDialog(
+                    context: context,
+                    builder: (context) {
+                      return ProfileUpdater(
+                        userdata: userdata,
+                      );
+                    },
+                  );
                 },
                 child: Text(
                   "Update Profile",
@@ -79,67 +87,67 @@ class ProfileView extends StatelessWidget {
   }
 }
 
-class ProfileDropDown extends StatelessWidget {
-  final String category;
-  const ProfileDropDown({Key key, this.category}) : super(key: key);
+// class ProfileUpdateDropDown extends StatelessWidget {
+//   final String category;
+//   const ProfileUpdateDropDown({Key key, this.category}) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    final expanded = Provider.of<ExpandedDropDown>(context, listen: false);
-    final ingredients = Provider.of<Map<String, dynamic>>(context);
+//   @override
+//   Widget build(BuildContext context) {
+//     final expanded = Provider.of<ExpandedDropDown>(context, listen: false);
+//     final userdata = Provider.of<UserData>(context);
 
-    List<Widget> dropdownWidgets = [
-      Container(
-        child: GestureDetector(
-          onTap: () {
-            expanded.flip();
-          },
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                category,
-                style: TextStyle(
-                  fontSize: MediaQuery.of(context).size.width / 25,
-                ),
-              ),
-              Consumer<ExpandedDropDown>(
-                builder: (_, expanded, __) => expanded.expanded
-                    ? Icon(Icons.arrow_drop_up)
-                    : Icon(Icons.arrow_drop_down),
-              )
-            ],
-          ),
-        ),
-        decoration: const BoxDecoration(
-          border: Border(
-            bottom: BorderSide(width: 1.0, color: Colors.grey),
-          ),
-        ),
-      ),
-    ];
-    ingredients[category].keys.forEach((ingredient) {
-      dropdownWidgets.add(
-        ProfileDropDownItem(
-          category: category,
-          ingredient: ingredient,
-        ),
-      );
-    });
+//     List<Widget> dropdownWidgets = [
+//       Container(
+//         child: GestureDetector(
+//           onTap: () {
+//             expanded.flip();
+//           },
+//           child: Row(
+//             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//             children: [
+//               Text(
+//                 category,
+//                 style: TextStyle(
+//                   fontSize: MediaQuery.of(context).size.width / 25,
+//                 ),
+//               ),
+//               Consumer<ExpandedDropDown>(
+//                 builder: (_, expanded, __) => expanded.expanded
+//                     ? Icon(Icons.arrow_drop_up)
+//                     : Icon(Icons.arrow_drop_down),
+//               )
+//             ],
+//           ),
+//         ),
+//         decoration: const BoxDecoration(
+//           border: Border(
+//             bottom: BorderSide(width: 1.0, color: Colors.grey),
+//           ),
+//         ),
+//       ),
+//     ];
+//     // userdata[category].keys.forEach((ingredient) {
+//     //   dropdownWidgets.add(
+//     //     ProfileDropDownItem(
+//     //       category: category,
+//     //       ingredient: ingredient,
+//     //     ),
+//     //   );
+//     // });
 
-    return Consumer<ExpandedDropDown>(
-      builder: (_, expanded, __) => Container(
-        width: MediaQuery.of(context).size.width / 1.4,
-        height: expanded.expanded
-            ? MediaQuery.of(context).size.height /
-                30 *
-                (ingredients[category].keys.length + 1)
-            : MediaQuery.of(context).size.height / 30,
-        child: Column(children: dropdownWidgets),
-      ),
-    );
-  }
-}
+//     // return Consumer<ExpandedDropDown>(
+//     //   builder: (_, expanded, __) => Container(
+//     //     width: MediaQuery.of(context).size.width / 1.4,
+//     //     height: expanded.expanded
+//     //         ? MediaQuery.of(context).size.height /
+//     //             30 *
+//     //             (ingredients[category].keys.length + 1)
+//     //         : MediaQuery.of(context).size.height / 30,
+//     //     child: Column(children: dropdownWidgets),
+//     //   ),
+//     // );
+//   }
+// }
 
 class ProfileDropDownItem extends StatelessWidget {
   final String ingredient, category;

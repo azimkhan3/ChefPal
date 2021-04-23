@@ -61,6 +61,19 @@ class FirestoreService {
         .map(_userdataFromSnapshot);
   }
 
+  //Update userdata
+  Future<void> updateUserData(UserData userdata) async {
+    return await _db
+        .collection('Users')
+        .doc(uid)
+        .update({
+          'intolerences': userdata.userIntolerences,
+          'diet': userdata.userDiet
+        })
+        .then((value) => print("userdata updated"))
+        .catchError((err) => print(err));
+  }
+
   //return map of ingredients to user
   Map<String, dynamic> _ingredientsFromSnapshot(DocumentSnapshot snapshot) {
     //print(snapshot.get('ingredients'));
