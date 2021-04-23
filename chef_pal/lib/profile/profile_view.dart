@@ -34,7 +34,7 @@ class ProfileView extends StatelessWidget {
                 bottom: MediaQuery.of(context).size.height / 20,
               ),
               child: Text(
-                "Hello ${userdata.userName}",
+                userdata != null ? "Hello ${userdata.userName}" : "Hello",
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: MediaQuery.of(context).size.width / 15,
@@ -46,14 +46,16 @@ class ProfileView extends StatelessWidget {
               child: MaterialButton(
                 color: Colors.orange.shade700,
                 onPressed: () {
-                  showDialog(
-                    context: context,
-                    builder: (context) {
-                      return ProfileUpdater(
-                        userdata: userdata,
-                      );
-                    },
-                  );
+                  if (userdata != null) {
+                    showDialog(
+                      context: context,
+                      builder: (context) {
+                        return ProfileUpdater(
+                          userdata: userdata,
+                        );
+                      },
+                    );
+                  }
                 },
                 child: Text(
                   "Update Profile",
@@ -63,7 +65,7 @@ class ProfileView extends StatelessWidget {
                 ),
               ),
             ),
-            IntolerencesWidget(),
+            if (userdata != null) IntolerencesWidget(),
             Container(
               alignment: Alignment.center,
               width: MediaQuery.of(context).size.width,
