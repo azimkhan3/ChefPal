@@ -16,11 +16,23 @@ class SavedRecipesView extends StatelessWidget {
         padding: EdgeInsets.only(top: MediaQuery.of(context).size.height / 12),
         child: Column(
           children: [
-            Text(
-              "Saved Recipes",
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: MediaQuery.of(context).size.width / 15,
+            SizedBox(
+              height: MediaQuery.of(context).size.width / 4,
+              child: Image.asset(
+                "assets/logo.png",
+                fit: BoxFit.contain,
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(
+                top: MediaQuery.of(context).size.height / 25,
+              ),
+              child: Text(
+                "Saved Recipes",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: MediaQuery.of(context).size.width / 15,
+                ),
               ),
             ),
             if (savedRecipes != null)

@@ -17,8 +17,8 @@ class _IngredientsViewState extends State<IngredientsView> {
     List<Widget> categories = [];
     ingredients.keys.forEach((category) {
       categories.add(
-        ChangeNotifierProvider<Expanded>(
-          create: (context) => Expanded(),
+        ChangeNotifierProvider<ExpandedDropDown>(
+          create: (context) => ExpandedDropDown(),
           child: IngredientDropDown(
             category: category,
           ),
@@ -33,9 +33,18 @@ class _IngredientsViewState extends State<IngredientsView> {
         padding: EdgeInsets.only(top: MediaQuery.of(context).size.height / 12),
         child: Column(
           children: [
+            SizedBox(
+              height: MediaQuery.of(context).size.width / 4,
+              child: Image.asset(
+                "assets/logo.png",
+                fit: BoxFit.contain,
+              ),
+            ),
             Padding(
               padding: EdgeInsets.only(
-                  bottom: MediaQuery.of(context).size.height / 20),
+                top: MediaQuery.of(context).size.height / 25,
+                bottom: MediaQuery.of(context).size.height / 25,
+              ),
               child: Text(
                 "Ingredient Selection",
                 textAlign: TextAlign.center,
@@ -60,7 +69,7 @@ class IngredientDropDown extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final expanded = Provider.of<Expanded>(context, listen: false);
+    final expanded = Provider.of<ExpandedDropDown>(context, listen: false);
     final ingredients = Provider.of<Map<String, dynamic>>(context);
 
     List<Widget> dropdownWidgets = [
@@ -78,7 +87,7 @@ class IngredientDropDown extends StatelessWidget {
                   fontSize: MediaQuery.of(context).size.width / 25,
                 ),
               ),
-              Consumer<Expanded>(
+              Consumer<ExpandedDropDown>(
                 builder: (_, expanded, __) => expanded.expanded
                     ? Icon(Icons.arrow_drop_up)
                     : Icon(Icons.arrow_drop_down),
@@ -102,7 +111,7 @@ class IngredientDropDown extends StatelessWidget {
       );
     });
 
-    return Consumer<Expanded>(
+    return Consumer<ExpandedDropDown>(
       builder: (_, expanded, __) => Container(
         width: MediaQuery.of(context).size.width / 1.4,
         height: expanded.expanded
@@ -127,7 +136,7 @@ class IngredientDropDownItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final ingredients = Provider.of<Map<String, dynamic>>(context);
 
-    return Consumer<Expanded>(
+    return Consumer<ExpandedDropDown>(
       builder: (_, expanded, __) => expanded.expanded
           ? Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -166,7 +175,7 @@ class IngredientDropDownItem extends StatelessWidget {
   }
 }
 
-class Expanded with ChangeNotifier {
+class ExpandedDropDown with ChangeNotifier {
   bool expanded = false;
 
   void flip() {
