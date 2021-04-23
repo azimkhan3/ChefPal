@@ -7,22 +7,42 @@ class FirestoreService {
   FirestoreService(this.uid);
 
   //create user
-  Future<void> initUser() async {
-    Map<String, dynamic> ingredients = {
+  Future<void> initUser(String username) async {
+    Map<String, dynamic> userData = {
+      'username': username,
       'ingredients': {
         'Meat': {"Chicken": false, "Beef": false},
         'Seafood': {"Shrimp": false, "Salmon": false},
         'Vegetable': {"Carrots": false, "Onions": false},
-      }
+      },
+      'diet': null,
+      'intolerences': {
+        'Dairy': false,
+        'Egg': false,
+        'Gluten': false,
+        'Grain': false,
+        'Peanut': false,
+        'Seafood': false,
+        'Sesame': false,
+        'Shellfish': false,
+        'Soy': false,
+        'Sulfite': false,
+        'Tree Nut': false,
+        'Wheat': false,
+      },
     };
+
     return await _db
         .collection('Users')
         .doc(this.uid)
-        .set(ingredients)
+        .set(userData)
         .then((value) => print('User created'))
         .catchError(
             (err) => print("Failed to create instance of user $uid : $err"));
   }
+
+  //TODO: create stream for intolerences and diet
+  //TODO: Map stream of intolerances and diet
 
   //return map of ingredients to user
   Map<String, dynamic> _ingredientsFromSnapshot(DocumentSnapshot snapshot) {

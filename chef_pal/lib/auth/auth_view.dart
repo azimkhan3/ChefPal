@@ -10,6 +10,7 @@ class AuthentificationView extends StatefulWidget {
 
 class _AuthentificationViewState extends State<AuthentificationView> {
   //captures text for textfields
+  final TextEditingController _usernameField = TextEditingController();
   final TextEditingController _emailField = TextEditingController();
   final TextEditingController _passwordField = TextEditingController();
   final TextEditingController _passwordCheckField = TextEditingController();
@@ -44,6 +45,28 @@ class _AuthentificationViewState extends State<AuthentificationView> {
                       fit: BoxFit.contain,
                     ),
                   ),
+                  if (!login)
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height / 35,
+                    ),
+                  if (!login)
+                    Container(
+                      width: MediaQuery.of(context).size.width / 1.3,
+                      child: TextFormField(
+                        validator: (_usernameField) =>
+                            !(_usernameField.length > 3)
+                                ? 'Username Must be at least 3 characters long'
+                                : null,
+                        style: TextStyle(color: Colors.grey.shade700),
+                        controller: _usernameField,
+                        decoration: InputDecoration(
+                          // hintText: "Username",
+                          // hintStyle: TextStyle(color: Colors.grey.shade400),
+                          labelText: "Username",
+                          labelStyle: TextStyle(color: Colors.grey),
+                        ),
+                      ),
+                    ),
                   SizedBox(
                     height: MediaQuery.of(context).size.height / 35,
                   ),
@@ -117,7 +140,7 @@ class _AuthentificationViewState extends State<AuthentificationView> {
                       color: Colors.white,
                     ),
                     child: MaterialButton(
-                      color: Colors.orange.shade400,
+                      color: Colors.orange.shade700,
                       onPressed: () {
                         if (_formKey.currentState.validate()) {
                           setState(() => loading = true);
@@ -131,6 +154,7 @@ class _AuthentificationViewState extends State<AuthentificationView> {
                           } else {
                             _result =
                                 context.read<AuthentificationService>().signUp(
+                                      _usernameField.text.trim(),
                                       _emailField.text.trim(),
                                       _passwordField.text.trim(),
                                     );
@@ -165,7 +189,7 @@ class _AuthentificationViewState extends State<AuthentificationView> {
                       child: Align(
                         alignment: Alignment.bottomCenter,
                         child: Container(
-                          height: MediaQuery.of(context).size.height / 12,
+                          height: MediaQuery.of(context).size.height / 10,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
