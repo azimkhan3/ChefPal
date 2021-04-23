@@ -63,7 +63,7 @@ class FirestoreService {
 
   //return map of ingredients to user
   Map<String, dynamic> _ingredientsFromSnapshot(DocumentSnapshot snapshot) {
-    print(snapshot.get('ingredients'));
+    //print(snapshot.get('ingredients'));
     return snapshot.get('ingredients');
   }
 
@@ -169,7 +169,7 @@ class FirestoreService {
     return await _db
         .collection('Users')
         .doc(uid)
-        .set({'ingredients': data})
+        .update({'ingredients': data})
         .then((value) => print("ingredients updated"))
         .catchError((err) => print(err));
   }
