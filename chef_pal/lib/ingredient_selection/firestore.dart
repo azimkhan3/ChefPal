@@ -41,8 +41,23 @@ class FirestoreService {
             (err) => print("Failed to create instance of user $uid : $err"));
   }
 
-  //TODO: create stream for intolerences and diet
-  //TODO: Map stream of intolerances and diet
+  //return map of userdata
+  Map<String, dynamic> _userdataFromSnapshot(DocumentSnapshot snapshot) {
+    return {
+      'username': snapshot.get('username'),
+      'diet': snapshot.get('diet'),
+      'intolerences': snapshot.get('intolerences'),
+    };
+  }
+
+  //ingredient Stream
+  Stream<Map<String, dynamic>> get userdata {
+    return _db
+        .collection('Users')
+        .doc(uid)
+        .snapshots()
+        .map(_userdataFromSnapshot);
+  }
 
   //return map of ingredients to user
   Map<String, dynamic> _ingredientsFromSnapshot(DocumentSnapshot snapshot) {
