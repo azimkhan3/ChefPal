@@ -53,8 +53,8 @@ class SearchResult with ChangeNotifier {
     notifyListeners();
   }
 
-  void ingredientSearch(
-      Map<String, dynamic> ingredientsMap, UserData userdata) async {
+  void ingredientSearch(Map<String, dynamic> ingredientsMap,
+      RecipeFilters filters, UserData userdata) async {
     List<String> ingredients = [];
     ingredientsMap.forEach((category, value) {
       value.forEach((ingredient, status) {
@@ -62,8 +62,10 @@ class SearchResult with ChangeNotifier {
       });
     });
     print(ingredients);
+
     List<Recipe> unfilteredRecipes =
         await ApiService.instance.generateRecipes(ingredients);
+    print(unfilteredRecipes.length);
     List<Recipe> filteredRecipes = [];
     if (userdata.userDiet != null) {
       for (Recipe recipe in unfilteredRecipes) {
@@ -72,6 +74,8 @@ class SearchResult with ChangeNotifier {
         }
       }
     }
+    recipes = filteredRecipes;
+    print(recipes.length);
     notifyListeners();
   }
 }
@@ -147,7 +151,7 @@ class _SearchBarState extends State<SearchBar> {
             color: Colors.orange.shade700,
             onPressed: () async {
               // print(ingredients);
-              recipes.ingredientSearch(ingredients, userdata);
+              recipes.ingredientSearch(ingredients, filters, userdata);
             },
             child: Text(
               "Ingredient Based Search",
