@@ -15,16 +15,17 @@ class _IngredientsViewState extends State<IngredientsView> {
   Widget build(BuildContext context) {
     final ingredients = Provider.of<Map<String, dynamic>>(context);
     List<Widget> categories = [];
-    ingredients.keys.forEach((category) {
-      categories.add(
-        ChangeNotifierProvider<ExpandedDropDown>(
-          create: (context) => ExpandedDropDown(),
-          child: IngredientDropDown(
-            category: category,
+    if (ingredients != null)
+      ingredients.keys.forEach((category) {
+        categories.add(
+          ChangeNotifierProvider<ExpandedDropDown>(
+            create: (context) => ExpandedDropDown(),
+            child: IngredientDropDown(
+              category: category,
+            ),
           ),
-        ),
-      );
-    });
+        );
+      });
     return Container(
       alignment: Alignment.center,
       height: MediaQuery.of(context).size.height,
