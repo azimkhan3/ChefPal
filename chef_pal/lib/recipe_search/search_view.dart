@@ -1,35 +1,26 @@
+import 'package:chef_pal/ingredient_selection/ingredient_view.dart';
+import 'package:chef_pal/profile/user_model.dart';
+import 'package:chef_pal/recipe_search/filtering/filtering_widget.dart';
+import 'package:chef_pal/recipe_search/filtering/filters_model.dart';
 import 'package:chef_pal/recipe_search/recipe_list_widget.dart';
 import 'package:chef_pal/recipe_search/recipe_model.dart';
 import 'package:chef_pal/recipe_search/spoonacular_api.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class SearchResult with ChangeNotifier {
-  List<Recipe> recipes = [];
-  void setRecipes(String search) async {
-    recipes = await ApiService.instance.searchRecipes(search);
-    notifyListeners();
-  }
-
-  void ingredientSearch(Map<String, dynamic> ingredientsMap) async {
-    List<String> ingredients = [];
-    ingredientsMap.forEach((category, value) {
-      value.forEach((ingredient, status) {
-        if (status) ingredients.add(ingredient);
-      });
-    });
-    print(ingredients);
-    recipes = await ApiService.instance.generateRecipes(ingredients);
-    notifyListeners();
-  }
-}
-
 class SearchView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ChangeNotifierProvider<SearchResult>(
-        create: (context) => SearchResult(),
+      body: MultiProvider(
+        providers: [
+          ChangeNotifierProvider<SearchResult>(
+            create: (context) => SearchResult(),
+          ),
+          ChangeNotifierProvider<RecipeFilters>(
+            create: (context) => RecipeFilters(),
+          ),
+        ],
         child: Padding(
           padding: const EdgeInsets.only(
             top: 50,
@@ -39,6 +30,10 @@ class SearchView extends StatelessWidget {
             child: Column(
               children: <Widget>[
                 SearchBar(),
+                ChangeNotifierProvider<ExpandedFilters>(
+                  create: (context) => ExpandedFilters(),
+                  child: FilteringWidget(),
+                ),
                 RecipeSearchDisplay(),
               ],
             ),
@@ -46,6 +41,38 @@ class SearchView extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class SearchResult with ChangeNotifier {
+  List<Recipe> recipes = [];
+  void setRecipes(
+      String search, RecipeFilters filters, UserData userdata) async {
+    recipes =
+        await ApiService.instance.searchRecipes(search, filters, userdata);
+    notifyListeners();
+  }
+
+  void ingredientSearch(
+      Map<String, dynamic> ingredientsMap, UserData userdata) async {
+    List<String> ingredients = [];
+    ingredientsMap.forEach((category, value) {
+      value.forEach((ingredient, status) {
+        if (status) ingredients.add(ingredient);
+      });
+    });
+    print(ingredients);
+    List<Recipe> unfilteredRecipes =
+        await ApiService.instance.generateRecipes(ingredients);
+    List<Recipe> filteredRecipes = [];
+    if (userdata.userDiet != null) {
+      for (Recipe recipe in unfilteredRecipes) {
+        if (recipe.diets.contains(userdata.userDiet.toLowerCase())) {
+          filteredRecipes.add(recipe);
+        }
+      }
+    }
+    notifyListeners();
   }
 }
 
@@ -74,7 +101,10 @@ class _SearchBarState extends State<SearchBar> {
   Widget build(BuildContext context) {
     TextEditingController _searchField = TextEditingController();
     final recipes = Provider.of<SearchResult>(context, listen: false);
-    final ingredients = Provider.of<Map<String, dynamic>>(context);
+    final userdata = Provider.of<UserData>(context, listen: false);
+    final ingredients =
+        Provider.of<Map<String, dynamic>>(context, listen: false);
+    final filters = Provider.of<RecipeFilters>(context, listen: false);
     return Column(
       children: [
         Container(
@@ -95,9 +125,9 @@ class _SearchBarState extends State<SearchBar> {
             color: Colors.white,
           ),
           child: MaterialButton(
-            color: Colors.orange.shade400,
+            color: Colors.orange.shade700,
             onPressed: () async {
-              recipes.setRecipes(_searchField.text);
+              recipes.setRecipes(_searchField.text, filters, userdata);
             },
             child: Text(
               "Search",
@@ -114,10 +144,10 @@ class _SearchBarState extends State<SearchBar> {
             color: Colors.white,
           ),
           child: MaterialButton(
-            color: Colors.orange.shade400,
+            color: Colors.orange.shade700,
             onPressed: () async {
               // print(ingredients);
-              recipes.ingredientSearch(ingredients);
+              recipes.ingredientSearch(ingredients, userdata);
             },
             child: Text(
               "Ingredient Based Search",
@@ -129,5 +159,14 @@ class _SearchBarState extends State<SearchBar> {
         ),
       ],
     );
+  }
+}
+
+class ExpandedFilters with ChangeNotifier {
+  bool expanded = false;
+
+  void flip() {
+    expanded = !expanded;
+    notifyListeners();
   }
 }

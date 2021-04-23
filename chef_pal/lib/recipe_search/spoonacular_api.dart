@@ -1,5 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:chef_pal/profile/user_model.dart';
+import 'package:chef_pal/recipe_search/filtering/filters_model.dart';
 import 'package:chef_pal/recipe_search/recipe_model.dart';
 import 'package:http/http.dart' as http;
 
@@ -14,7 +16,9 @@ class ApiService {
   // static const String API_KEY = "30f86d0d42554f14aa08180f664db122";
   //a26b1f378c714d9d95f0df0f2997e14c
   //ebd26db4189b436f9bd66117e3e8699c
-  Future<List<Recipe>> searchRecipes(String query) async {
+  Future<List<Recipe>> searchRecipes(
+      String query, RecipeFilters filters, UserData userdata) async {
+    //params
     Map<String, String> parameters = {
       'query': query,
       'number': '15',
@@ -24,6 +28,50 @@ class ApiService {
       'apiKey': API_KEY,
     };
 
+    //add diet
+    if (userdata.userDiet != null) {
+      parameters.addAll({'diet': userdata.userDiet.toLowerCase()});
+    }
+    List<String> intolerences = [];
+    userdata.userIntolerences.forEach((intolerence, value) {
+      if (value == true) {
+        intolerences.add(intolerence.toLowerCase());
+      }
+    });
+
+    //add intolerences
+    if (intolerences.length > 0) {
+      parameters.addAll({
+        'intolerances': intolerences
+            .toString()
+            .substring(1, intolerences.toString().length - 1)
+            .replaceAll(new RegExp(r"\s+"), "")
+      });
+    }
+
+    //add cuisines
+    List<String> cuisines = filters.cuisinesList;
+    if (cuisines.length > 0) {
+      parameters.addAll({
+        'cuisines': cuisines
+            .toString()
+            .substring(1, cuisines.toString().length - 1)
+            .replaceAll(new RegExp(r"\s+"), "")
+      });
+    }
+
+    //add mealtype
+    List<String> mealtypes = filters.mealtypesList;
+    if (mealtypes.length > 0) {
+      parameters.addAll({
+        'mealtypes': mealtypes
+            .toString()
+            .substring(1, mealtypes.toString().length - 1)
+            .replaceAll(new RegExp(r"\s+"), "")
+      });
+    }
+
+    print(parameters);
     Uri uri = Uri.https(
       _baseURL,
       '/recipes/complexSearch',
@@ -202,15 +250,13 @@ class ApiService {
       cheap: recipe['cheap'],
       veryPopular: recipe['veryPopular'],
       sustainable: recipe['sustainable'],
-      // cuisines: recipe['cuisines'].length > 0
-      //     ? recipe['cuisines'].Cast<String>().ToList()
-      //     : [],
-      // dishTypes: recipe['dishTypes'].length > 0
-      //     ? recipe['dishTypes'].Cast<String>().ToList()
-      //     : [],
-      // diets: recipe['diets'].length > 0
-      //     ? recipe['diets'].Cast<String>().ToList()
-      //     : [],
+      cuisines: recipe['cuisines'].length > 0
+          ? recipe['cuisines'].cast<String>()
+          : [],
+      dishTypes: recipe['dishTypes'].length > 0
+          ? recipe['dishTypes'].cast<String>()
+          : [],
+      diets: recipe['diets'].length > 0 ? recipe['diets'].cast<String>() : [],
     );
   }
 }
