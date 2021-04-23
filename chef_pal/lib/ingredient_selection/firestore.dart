@@ -1,3 +1,4 @@
+import 'package:chef_pal/profile/user_model.dart';
 import 'package:chef_pal/recipe_search/recipe_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -42,16 +43,17 @@ class FirestoreService {
   }
 
   //return map of userdata
-  Map<String, dynamic> _userdataFromSnapshot(DocumentSnapshot snapshot) {
-    return {
-      'username': snapshot.get('username'),
-      'diet': snapshot.get('diet'),
-      'intolerences': snapshot.get('intolerences'),
-    };
+  UserData _userdataFromSnapshot(DocumentSnapshot snapshot) {
+    return UserData(
+      uid: uid.toString(),
+      username: snapshot.get('username'),
+      diet: snapshot.get('diet'),
+      intolerences: snapshot.get('intolerences'),
+    );
   }
 
-  //ingredient Stream
-  Stream<Map<String, dynamic>> get userdata {
+  //UserData Stream
+  Stream<UserData> get userdata {
     return _db
         .collection('Users')
         .doc(uid)
