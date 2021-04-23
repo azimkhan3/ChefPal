@@ -44,6 +44,10 @@ class _HomeViewState extends State<HomeView> {
           value: context.read<FirestoreService>().savedRecipeIds,
           initialData: null,
         ),
+        StreamProvider.value(
+          value: context.read<FirestoreService>().userdata,
+          initialData: null,
+        ),
       ],
       child: Scaffold(
         body: _children[_currentIndex],
