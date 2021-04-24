@@ -41,7 +41,7 @@ class IntolerencesWidget extends StatelessWidget {
                   Container(
                     width: MediaQuery.of(context).size.width / 1.5,
                     child: Text(
-                      "${intol.substring(0, intol.length - 2)}",
+                      "${intol.length > 0 ? intol.substring(0, intol.length - 2) : "None"}",
                       style: TextStyle(
                           fontSize: MediaQuery.of(context).size.height / 75,
                           fontWeight: FontWeight.w300),
