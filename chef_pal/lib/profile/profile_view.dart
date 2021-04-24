@@ -11,7 +11,6 @@ import 'package:chef_pal/profile/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:provider/provider.dart';
-import 'package:location_permissions/location_permissions.dart';
 
 class ProfileView extends StatelessWidget {
   const ProfileView({Key key}) : super(key: key);
@@ -78,8 +77,8 @@ class ProfileView extends StatelessWidget {
               child: MaterialButton(
                 color: Colors.orange.shade700,
                 onPressed: () async {
-                  PermissionStatus permission =
-                      await LocationPermissions().requestPermissions();
+                  // PermissionStatus permission =
+                  //     await LocationPermissions().requestPermissions();
                   final locatorService = GeoLocatorService();
                   final placesService = PlacesService();
                   Navigator.push(
