@@ -12,8 +12,8 @@ class ApiService {
   static final ApiService instance = ApiService._instantiate();
   //Add base URL for the spoonacular API, endpoint and API Key as a constant
   final String _baseURL = "api.spoonacular.com";
-  static const String API_KEY = "a6ce9d76a0cb413cab0c9b5a8636407c";
-  // static const String API_KEY = "30f86d0d42554f14aa08180f664db122";
+  // static const String API_KEY = "a6ce9d76a0cb413cab0c9b5a8636407c";
+  static const String API_KEY = "30f86d0d42554f14aa08180f664db122";
   //a26b1f378c714d9d95f0df0f2997e14c
   //ebd26db4189b436f9bd66117e3e8699c
   Future<List<Recipe>> searchRecipes(
@@ -77,6 +77,7 @@ class ApiService {
       '/recipes/complexSearch',
       parameters,
     );
+    print(uri);
     Map<String, String> headers = {
       HttpHeaders.contentTypeHeader: 'application/json',
     };
