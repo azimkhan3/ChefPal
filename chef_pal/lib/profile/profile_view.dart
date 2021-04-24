@@ -1,11 +1,17 @@
 import 'package:chef_pal/auth/firebase_auth.dart';
+import 'package:chef_pal/grocery_search/models/place.dart';
+import 'package:chef_pal/grocery_search/screens/search.dart';
+import 'package:chef_pal/grocery_search/services/geolocator_service.dart';
+import 'package:chef_pal/grocery_search/services/places_service.dart';
 import 'package:chef_pal/ingredient_selection/firestore.dart';
 import 'package:chef_pal/ingredient_selection/ingredient_view.dart';
 import 'package:chef_pal/profile/intolerences_widget.dart';
 import 'package:chef_pal/profile/update_profile_widget.dart';
 import 'package:chef_pal/profile/user_model.dart';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:provider/provider.dart';
+import 'package:location_permissions/location_permissions.dart';
 
 class ProfileView extends StatelessWidget {
   const ProfileView({Key key}) : super(key: key);
@@ -66,6 +72,44 @@ class ProfileView extends StatelessWidget {
               ),
             ),
             if (userdata != null) IntolerencesWidget(),
+            Container(
+              alignment: Alignment.center,
+              width: MediaQuery.of(context).size.width,
+              child: MaterialButton(
+                color: Colors.orange.shade700,
+                onPressed: () async {
+                  PermissionStatus permission =
+                      await LocationPermissions().requestPermissions();
+                  final locatorService = GeoLocatorService();
+                  final placesService = PlacesService();
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => MultiProvider(providers: [
+                        FutureProvider(
+                          create: (context) => locatorService.getLocation(),
+                          initialData: null,
+                        ),
+                        ProxyProvider<Position, Future<List<Place>>>(
+                          update: (context, position, places) {
+                            return (position != null)
+                                ? placesService.getPlaces(
+                                    position.latitude, position.longitude)
+                                : null;
+                          },
+                        )
+                      ], child: Search()),
+                    ),
+                  );
+                },
+                child: Text(
+                  "Search Grocery Stores",
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ),
             Container(
               alignment: Alignment.center,
               width: MediaQuery.of(context).size.width,
