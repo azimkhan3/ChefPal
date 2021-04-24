@@ -31,6 +31,19 @@ class RecipeView extends StatelessWidget {
                 top: MediaQuery.of(context).size.height / 55,
               ),
               child: Text(
+                "Recipe Information",
+                style: TextStyle(
+                  fontSize: MediaQuery.of(context).size.width / 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            RecipeTags(_recipe),
+            Padding(
+              padding: EdgeInsets.only(
+                top: MediaQuery.of(context).size.height / 55,
+              ),
+              child: Text(
                 "Ingredients",
                 style: TextStyle(
                   fontSize: MediaQuery.of(context).size.width / 20,
@@ -66,8 +79,35 @@ class RecipeTags extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: MediaQuery.of(context).size.width,
       child: Column(
-        children: [],
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Vegan: ${_recipe.vegan ? "Yes" : "No"}',
+          ),
+          Text(
+            'Vegetarian: ${_recipe.vegetarian ? "Yes" : "No"}',
+          ),
+          Text(
+            'Gluten Free: ${_recipe.glutenFree ? "Yes" : "No"}',
+          ),
+          Text(
+            'Dairy Free: ${_recipe.dairyFree ? "Yes" : "No"}',
+          ),
+          Text(
+            'Very Healthy: ${_recipe.veryHealthy ? "Yes" : "No"}',
+          ),
+          Text(
+            'Cheap: ${_recipe.cheap ? "Yes" : "No"}',
+          ),
+          Text(
+            'Very Popular: ${_recipe.veryPopular ? "Yes" : "No"}',
+          ),
+          Text(
+            'Sustainable: ${_recipe.sustainable ? "Yes" : "No"}',
+          ),
+        ],
       ),
     );
   }
