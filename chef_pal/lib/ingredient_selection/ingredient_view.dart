@@ -26,38 +26,41 @@ class _IngredientsViewState extends State<IngredientsView> {
           ),
         );
       });
-    return Container(
-      alignment: Alignment.center,
-      height: MediaQuery.of(context).size.height,
-      width: MediaQuery.of(context).size.width,
-      child: Padding(
-        padding: EdgeInsets.only(top: MediaQuery.of(context).size.height / 12),
-        child: Column(
-          children: [
-            SizedBox(
-              height: MediaQuery.of(context).size.width / 4,
-              child: Image.asset(
-                "assets/logo.png",
-                fit: BoxFit.contain,
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(
-                top: MediaQuery.of(context).size.height / 25,
-                bottom: MediaQuery.of(context).size.height / 25,
-              ),
-              child: Text(
-                "Ingredient Selection",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: MediaQuery.of(context).size.width / 15,
+    return SingleChildScrollView(
+      child: Container(
+        alignment: Alignment.center,
+        //height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
+        child: Padding(
+          padding:
+              EdgeInsets.only(top: MediaQuery.of(context).size.height / 12),
+          child: Column(
+            children: [
+              SizedBox(
+                height: MediaQuery.of(context).size.width / 4,
+                child: Image.asset(
+                  "assets/logo.png",
+                  fit: BoxFit.contain,
                 ),
               ),
-            ),
-            Column(
-              children: categories,
-            ),
-          ],
+              Padding(
+                padding: EdgeInsets.only(
+                  top: MediaQuery.of(context).size.height / 25,
+                  bottom: MediaQuery.of(context).size.height / 25,
+                ),
+                child: Text(
+                  "Ingredient Selection",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: MediaQuery.of(context).size.width / 15,
+                  ),
+                ),
+              ),
+              Column(
+                children: categories,
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -113,14 +116,16 @@ class IngredientDropDown extends StatelessWidget {
     });
 
     return Consumer<ExpandedDropDown>(
-      builder: (_, expanded, __) => Container(
-        width: MediaQuery.of(context).size.width / 1.4,
-        height: expanded.expanded
-            ? MediaQuery.of(context).size.height /
-                30 *
-                (ingredients[category].keys.length + 1)
-            : MediaQuery.of(context).size.height / 30,
-        child: Column(children: dropdownWidgets),
+      builder: (_, expanded, __) => SingleChildScrollView(
+        child: Container(
+          width: MediaQuery.of(context).size.width / 1.4,
+          // height: expanded.expanded
+          //     ? MediaQuery.of(context).size.height /
+          //         30 *
+          //         (ingredients[category].keys.length + 1)
+          //     : MediaQuery.of(context).size.height / 30,
+          child: Column(children: dropdownWidgets),
+        ),
       ),
     );
   }
