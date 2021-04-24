@@ -8,15 +8,17 @@ flutter app for recipes
 
 ## Running
 
+
 ```bash
     flutter run
+    #within the chef_pal directory
 ```
 
 ---
 
 ## Lib Layout
 
-In our lib folder which is our src folder for flutter we have 3 divisions. One being the class models that we use, one being the services, and the last being the views.
+In our lib folder which is our src folder for flutter we have seperated our code into sections based on app functionality.
 
 ### Models
 
