@@ -1,3 +1,8 @@
+// written by: Micheal
+// tested by: Nirav
+// debugged by: 
+// Creates list of recipes
+
 import 'package:chef_pal/recipe_search/recipe_preview.dart';
 import 'package:flutter/material.dart';
 

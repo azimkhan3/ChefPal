@@ -1,3 +1,8 @@
+// written by: Shahir, Daniel, Malak
+// tested by:  Micheal
+// debugged by: Shahir, Malak
+// etc.
+
 import 'package:chef_pal/recipe_search/recipe_list_widget.dart';
 import 'package:chef_pal/recipe_search/recipe_model.dart';
 import 'package:flutter/material.dart';

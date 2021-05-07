@@ -1,3 +1,8 @@
+// written by: Malak, Azim Daniel
+// tested by: Daniel
+// debugged by: Shahir
+// Widget for updating profile
+
 import 'package:chef_pal/ingredient_selection/firestore.dart';
 import 'package:chef_pal/profile/user_model.dart';
 import 'package:flutter/material.dart';

@@ -1,3 +1,8 @@
+// written by: Shahir
+// tested by: Shahir
+// debugged by: Shahir
+// App initilizer
+
 import 'package:chef_pal/auth/auth_view.dart';
 import 'package:chef_pal/auth/firebase_auth.dart';
 import 'package:chef_pal/home_view.dart';

@@ -1,3 +1,8 @@
+// written by: Malena, Nirav
+// tested by: Michael
+// debugged by: Daniel
+// Recipe data model
+
 class Recipe {
   final int id, readyInMinutes;
   final String title, summary, imgLink;

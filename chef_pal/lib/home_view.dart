@@ -1,3 +1,8 @@
+// written by: Shahir
+// tested by:
+// debugged by:
+// Main app page when logged in
+
 import 'package:chef_pal/ingredient_selection/firestore.dart';
 import 'package:chef_pal/ingredient_selection/ingredient_view.dart';
 import 'package:chef_pal/profile/profile_view.dart';
@@ -29,7 +34,7 @@ class _HomeViewState extends State<HomeView> {
         _currentIndex = index;
       });
     }
-
+    // create streams for data to be pass down the widget tree
     return MultiProvider(
       providers: [
         StreamProvider.value(

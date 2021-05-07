@@ -1,3 +1,8 @@
+// written by: Azim Shahir Amanda
+// tested by: Aswathy
+// debugged by: Shahir
+// Widget for recipe filters
+
 import 'package:chef_pal/ingredient_selection/ingredient_view.dart';
 import 'package:chef_pal/profile/update_profile_widget.dart';
 import 'package:chef_pal/recipe_search/filtering/filters_model.dart';

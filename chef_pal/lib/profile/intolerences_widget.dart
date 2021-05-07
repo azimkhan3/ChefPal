@@ -1,3 +1,8 @@
+// written by: Azim, Malak, Daniel
+// tested by: Shahir
+// debugged by: Shahir
+// Intolerences View
+
 import 'package:chef_pal/profile/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

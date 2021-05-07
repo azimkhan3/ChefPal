@@ -1,3 +1,8 @@
+// written by: Nirav, Michael
+// tested by: Malena
+// debugged by: Shahir
+// Recipe preview widget
+
 import 'package:chef_pal/ingredient_selection/firestore.dart';
 import 'package:chef_pal/recipe_search/recipe_display.dart';
 import 'package:chef_pal/recipe_search/recipe_model.dart';

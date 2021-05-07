@@ -1,3 +1,8 @@
+// written by: Malak, Malena, Shahir 
+// tested by: Aswathy
+// debugged by: Shahir
+// Authentification Logic
+
 import 'package:chef_pal/ingredient_selection/firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -6,12 +11,15 @@ class AuthentificationService {
 
   AuthentificationService(this._firebaseAuth);
 
+  // Creates a User Stream
   Stream<User> get authStateChanges => _firebaseAuth.authStateChanges();
 
+  // Signs out user
   Future<void> signOut() async {
     await _firebaseAuth.signOut();
   }
 
+  // Signs in user
   Future<String> signIn(String email, String password) async {
     print(email.toString());
     print(password);
@@ -27,6 +35,7 @@ class AuthentificationService {
     }
   }
 
+  // Signs up user
   Future<String> signUp(String username, String email, String password) async {
     try {
       UserCredential user = await _firebaseAuth.createUserWithEmailAndPassword(

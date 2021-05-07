@@ -1,3 +1,8 @@
+// written by: Azim, Shahir, Nirav
+// tested by: Daniel
+// debugged by: Nirav, Azim, Shahir
+// Handles database logic for app
+
 import 'package:chef_pal/profile/user_model.dart';
 import 'package:chef_pal/recipe_search/recipe_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -957,6 +962,7 @@ class FirestoreService {
         .catchError((err) => print(err));
   }
 
+  // favorites recipe for user
   Future<void> favoriteRecipe(Recipe recipe) async {
     //favoriteRecipeList(recipe);
     return await _db
@@ -969,6 +975,7 @@ class FirestoreService {
         .catchError((err) => print(err));
   }
 
+  // unfavorites recipe for user
   Future<void> unfavoriteRecipe(Recipe recipe) async {
     //favoriteRecipeList(recipe);
     return await _db
@@ -981,6 +988,7 @@ class FirestoreService {
         .catchError((err) => print(err));
   }
 
+  
   Future<void> favoriteRecipeList(Recipe recipe, List<dynamic> recipes) async {
     return await _db
         .collection('Users')

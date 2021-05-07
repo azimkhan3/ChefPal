@@ -1,3 +1,8 @@
+// written by: Shahir
+// tested by:
+// debugged by:
+// Simple place holder wider
+
 import 'package:flutter/material.dart';
 
 class PlaceholderWidget extends StatelessWidget {

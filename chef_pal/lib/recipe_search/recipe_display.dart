@@ -1,3 +1,8 @@
+// written by: Malena, Nirav, Daniel
+// tested by: Malena
+// debugged by: Nirav
+// Displays Recipe Search Page
+
 import 'dart:ui';
 import 'package:chef_pal/recipe_search/recipe_model.dart';
 import 'package:flutter/material.dart';

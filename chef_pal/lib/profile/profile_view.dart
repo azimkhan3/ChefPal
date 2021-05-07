@@ -1,3 +1,8 @@
+// written by: Azim, Malak, Shahir
+// tested by: Daniel
+// debugged by: Shahir
+// Profile View page
+
 import 'package:chef_pal/auth/firebase_auth.dart';
 import 'package:chef_pal/grocery_search/models/place.dart';
 import 'package:chef_pal/grocery_search/screens/search.dart';

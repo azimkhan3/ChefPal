@@ -1,3 +1,8 @@
+// written by: Shahir, Malena, Malak, Dymitriy
+// tested by: Aswathy 
+// debugged by: Shahir, Amanda
+// Authentification Page for Registration and Login
+
 import 'package:chef_pal/auth/firebase_auth.dart';
 import 'package:chef_pal/utils/loading.dart';
 import 'package:flutter/material.dart';

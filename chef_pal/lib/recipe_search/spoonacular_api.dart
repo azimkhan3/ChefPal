@@ -1,3 +1,8 @@
+// written by: Shahir Nirav,
+// tested by: Malena
+// debugged by: Shahir
+// Logic for api requests to spooacular api
+
 import 'dart:convert';
 import 'dart:io';
 import 'package:chef_pal/profile/user_model.dart';
@@ -12,10 +17,13 @@ class ApiService {
   static final ApiService instance = ApiService._instantiate();
   //Add base URL for the spoonacular API, endpoint and API Key as a constant
   final String _baseURL = "api.spoonacular.com";
+
+  // api keys
   // static const String API_KEY = "a6ce9d76a0cb413cab0c9b5a8636407c";
   static const String API_KEY = "30f86d0d42554f14aa08180f664db122";
   //a26b1f378c714d9d95f0df0f2997e14c
   //ebd26db4189b436f9bd66117e3e8699c
+
   Future<List<Recipe>> searchRecipes(
       String query, RecipeFilters filters, UserData userdata) async {
     //params
@@ -152,6 +160,7 @@ class ApiService {
     }
   }
 
+  // gets recipe information based on recipe ids
   Future<List<Recipe>> getRecipeInformationBulk(List<String> recipeIds) async {
     // print(recipeIds.toString());
     Map<String, String> parameters = {
@@ -197,6 +206,7 @@ class ApiService {
     }
   }
 
+  // gets recipe data from json
   Recipe extractRecipe(dynamic recipe) {
     // if (recipe['instructions'] == null) return null;
     // Recipe recipe;

@@ -1,3 +1,8 @@
+// written by: Shahir
+// tested by:
+// debugged by:
+// User data class
+
 class UserData {
   final String uid;
   String username, diet;
